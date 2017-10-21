@@ -1,4 +1,4 @@
-const hapi = require('hapi');
+import * as hapi from 'hapi';
 // import Inert from 'inert'; // Usado para exposição de arquivos estáticos.
 const vision = require('vision'); // Usado para administração de template engines
 const hapiJwt = require('hapi-auth-jwt2');
