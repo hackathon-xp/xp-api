@@ -1,39 +1,33 @@
 import * as hapi from 'hapi';
 // import Inert from 'inert'; // Usado para exposição de arquivos estáticos.
 const vision = require('vision'); // Usado para administração de template engines
+const inert = require('inert'); // Usado para administração de template engines
 const hapiJwt = require('hapi-auth-jwt2');
-
-import * as HapiSwagger from './src/middlewares/plugins/HapiSwaggerPlugin';
-
+const hapiSwagger = require('hapi-swagger');
+import { HelloWorldRoute } from './src/routes/HelloWolrdRoute';
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 // import Joi from 'joi'; // Usado para validação de JSONs.
-
-const validate = (decoded: any, request: any, callback: any) => {
-  if (decoded) return callback(null, true);
-  return callback(null, false);
-};
 
 async function startApi() {
   try {
     // Instancia o HapiJS
     const server = new hapi.Server();
 
-    await server.connection({ port: global.process.env.APP_PORT });
+    await server.connection({ port: process.env.APP_PORT || 3000 });
 
-    await server.register(vision);
-
-    await server.register(hapiJwt);
-
-    server.auth.strategy('jwt', 'jwt', {
-      key: process.env.JWT_SECRET,
-      validateFunc: validate,
-      verifyOptions: { algorithms: ['HS256'] },
-    });
-
-    server.auth.default('jwt');
-
+    await server.register([
+      inert,
+      vision,
+      {
+        register: hapiSwagger,
+        options: { info: { title: 'Minha API', version: '1.0' } },
+      },
+    ]);
+    await server.route(new HelloWorldRoute().routes());
     await server.start();
 
-    console.info(`SERVER RUNNING: ${server.info.uri}`);
+    console.info(`SERVER RUNNING: ${(server.info || { uri: '' }).uri}`);
   } catch (error) {
     console.error(`Falha na inicialização da API: ${error}`);
   }

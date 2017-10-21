@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "start": "pm2-docker lib/bootstrap.js",
     "dev": "nodemon lib/bootstrap.js",
     "test": "nodemon --exec mocha lib/**/**/*.test.js"
   },
@@ -22,11 +23,12 @@
     "@types/vision": "^4.1.2",
     "bcrypt": "^1.0.3",
     "dotenv": "^4.0.0",
-    "hapi-auth-jwt2": "^7.3.0",
     "hapi": "^16.6.2",
+    "hapi-auth-jwt2": "^7.3.0",
     "hapi-handlers": "^2.0.0",
     "hapi-router": "^3.5.0",
     "hapi-swagger": "^7.8.1",
+    "inert": "^4.2.1",
     "joi": "^13.0.0",
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.12.3",
