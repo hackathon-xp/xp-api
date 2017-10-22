@@ -36,7 +36,7 @@ export class InvestmentRoute {
     );
     return res.json();
   }
-  /**
+  /**  
    * Create a new investment
    * 
    * @param {Hapi.Request} request 
