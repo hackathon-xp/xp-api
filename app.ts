@@ -16,7 +16,7 @@ async function startApi() {
     // Instancia o HapiJS
     const server = new hapi.Server();
 
-    await server.connection({ port: process.env.APP_PORT || 3000 });
+    await server.connection({ port: process.env.PORT || 3000 });
 
     await server.register([
       inert,

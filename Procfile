@@ -1,1 +1,1 @@
-web: pm2 start lib/bootstrap.js
+web: pm2 start lib/bootstrap.js $PORT = 3000
