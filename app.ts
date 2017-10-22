@@ -4,10 +4,12 @@ const vision = require('vision'); // Usado para administração de template engi
 const inert = require('inert'); // Usado para administração de template engines
 const hapiJwt = require('hapi-auth-jwt2');
 const hapiSwagger = require('hapi-swagger');
-import { HelloWorldRoute } from './src/routes/HelloWolrdRoute';
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-// import Joi from 'joi'; // Usado para validação de JSONs.
+
+// Routes import
+import { HelloWorldRoute } from './src/routes/HelloWolrdRoute';
+import { InvestmentRoute } from './src/routes/Investment';
 
 async function startApi() {
   try {
@@ -24,7 +26,11 @@ async function startApi() {
         options: { info: { title: 'Minha API', version: '1.0' } },
       },
     ]);
+
+    // System routes
     await server.route(new HelloWorldRoute().routes());
+    await server.route(new InvestmentRoute().routes());
+
     await server.start();
 
     console.info(`SERVER RUNNING: ${(server.info || { uri: '' }).uri}`);
