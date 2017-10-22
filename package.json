@@ -32,6 +32,7 @@
     "joi": "^13.0.0",
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.12.3",
+    "node-fetch": "^1.7.3",
     "tslint-config-airbnb": "^5.3.0",
     "typescript": "^2.5.3",
     "vision": "^4.1.1"
