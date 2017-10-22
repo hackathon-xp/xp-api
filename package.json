@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm i -g pm2 typescript && tsc",
     "build": "tsc",
     "start": "pm2-docker lib/bootstrap.js",
     "dev": "nodemon lib/bootstrap.js",
