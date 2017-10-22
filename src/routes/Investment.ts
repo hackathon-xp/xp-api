@@ -20,8 +20,6 @@ export class InvestmentRoute {
             input1: [
               {
                 CD_CLIENTE: customerId,
-                CD_FUNDO: 1,
-                ranking: 1,
               },
             ],
           },
