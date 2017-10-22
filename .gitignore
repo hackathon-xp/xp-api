@@ -2,3 +2,4 @@ node_modules/
 .vscode/
 GIT_KEY
 .git-crypt
+lib/

@@ -10,13 +10,14 @@ mongoose.Promise = global.Promise;
 // Routes import
 import { HelloWorldRoute } from './src/routes/HelloWolrdRoute';
 import { InvestmentRoute } from './src/routes/Investment';
+import { WalletRoute } from './src/routes/WalletRoute';
 
 async function startApi() {
   try {
     // Instancia o HapiJS
     const server = new hapi.Server();
 
-    await server.connection({ port: process.env.PORT || 3000 });
+    await server.connection({ port: process.env.PORT || 4000 });
 
     await server.register([
       inert,
@@ -29,6 +30,7 @@ async function startApi() {
 
     // System routes
     await server.route(new HelloWorldRoute().routes());
+    await server.route(new WalletRoute().routes());
     await server.route(new InvestmentRoute().routes());
 
     await server.start();
