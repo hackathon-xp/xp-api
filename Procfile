@@ -1,1 +1,1 @@
-web: pm2 start lib/bootstrap.js -p 3000
+web: node lib/bootstrap.js -p 3000
