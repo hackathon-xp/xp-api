@@ -6,9 +6,8 @@ const investmentSchema = new mongoose.Schema({
   name: String,
   id: String,
   investmentQuotation: String,
-  morningStar: String,
-  minimalInvestment: Number,
-  administrationRate: Number
+  classification: Object,
+  investmentConditions: Object,
 });
 
 export default mongoose.model('Investment', investmentSchema);

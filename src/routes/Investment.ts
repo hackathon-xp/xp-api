@@ -59,11 +59,30 @@ export class InvestmentRoute {
 
       const investment = await this.investmentModel
         .find({
-          CD_FUNDO: { $in: ids },
+          code: { $in: ids },
         })
         .limit(20);
-      console.log('quantidade', investment.length);
-      return reply({ investment });
+
+      const items = investment.map((i: any) => {
+        const item = {
+          code: i.code,
+          cnpj: i.cnpj,
+          name: i.name,
+          id: i.id,
+          investmentQuotation: i.investmentQuotation,
+          classification: (i.classification || { morningStar: '' }).morningStar,
+          minimalInvestment: (i.investmentConditions || {
+            minimalInvestment: '',
+          }).minimalInvestment,
+          administrationRate: (i.investmentConditions || {
+            administrationRate: '',
+          }).administrationRate,
+        };
+
+        return item;
+      });
+      console.log('quantidade', items.length);
+      return reply(items);
     } catch (e) {
       console.log(`ERROR: `, e);
       return reply(e);
