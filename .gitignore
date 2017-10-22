@@ -1,5 +1,4 @@
 node_modules/
 .vscode/
-lib/
 GIT_KEY
 .git-crypt
