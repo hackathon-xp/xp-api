@@ -9,7 +9,7 @@ export class WalletRoute {
   constructor() {
     this.walletModel = WalletModel;
   }
-  
+
   public async wallet(
     request: Hapi.Request,
     reply: Hapi.ReplyNoContinue,
@@ -23,22 +23,24 @@ export class WalletRoute {
     }
   }
 
-  
   public async balanceWallet(
     request: Hapi.Request,
-    reply: Hapi.ReplyNoContinue
+    reply: Hapi.ReplyNoContinue,
   ): Promise<Hapi.ReplyValue> {
     try {
       const { payload } = request;
 
-      const user = await this.walletModel.update({ '_id': payload.old_id }, {
-        $set: {
-          'status': 'inactive'
-        }
-      });
-      var newWallet = await this.walletModel.create({
+      const user = await this.walletModel.update(
+        { _id: payload.old_id },
+        {
+          $set: {
+            status: 'inactive',
+          },
+        },
+      );
+      const newWallet = await this.walletModel.create({
         userId: user.userId,
-        investments: payload.investments_id
+        investments: payload.investments_id,
       });
       reply(newWallet);
     } catch (e) {
@@ -46,7 +48,7 @@ export class WalletRoute {
       return reply(e);
     }
   }
-      
+
   private async createWalletFn(
     request: Hapi.Request,
     reply: Hapi.ReplyNoContinue,
@@ -101,7 +103,7 @@ export class WalletRoute {
       },
     };
   }
-  
+
   /**
    * @returns [Returns the Route object for HapiRouter to setup]
    * @memberOf HelloWorldRoute
@@ -117,7 +119,7 @@ export class WalletRoute {
         validate: {
           payload: {
             old_id: joi.string().required(),
-            investments_id: joi.array().required()
+            investments_id: joi.array().required(),
           },
         },
         handler: (req: any, reply: any) => this.balanceWallet(req, reply),
